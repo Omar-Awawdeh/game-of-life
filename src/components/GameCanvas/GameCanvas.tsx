@@ -55,8 +55,6 @@ export function GameCanvas({
       return;
     }
 
-    const scale = window.devicePixelRatio;
-    context.scale(scale, scale);
     // Make the canvas fill the entire screen
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
