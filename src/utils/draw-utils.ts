@@ -3,7 +3,8 @@ import { CANVAS_BG_COLOR, CANVAS_GRID_COLOR, CELL_SIZE } from "./constants";
 
 export const drawCells = (
   context: CanvasRenderingContext2D,
-  cells: Cell[]
+  cells: Cell[],
+  offset: { x: number; y: number }
 ): CanvasRenderingContext2D => {
   cells.forEach((cell) => {
     // Set the color of the cell
@@ -11,8 +12,8 @@ export const drawCells = (
 
     // Draw the cell accounting for the grid lines
     context.fillRect(
-      cell.column * CELL_SIZE + 1,
-      cell.row * CELL_SIZE + 1,
+      cell.column * CELL_SIZE + 1 + offset.y,
+      cell.row * CELL_SIZE + 1 + offset.x,
       CELL_SIZE - 2,
       CELL_SIZE - 2
     );
@@ -24,7 +25,8 @@ export const drawCells = (
 export const drawGrid = (
   context: CanvasRenderingContext2D,
   width: number,
-  height: number
+  height: number,
+  offset: { x: number; y: number }
 ): CanvasRenderingContext2D => {
   // Fill the canvas with gray background
   context.fillStyle = CANVAS_BG_COLOR;
@@ -38,15 +40,31 @@ export const drawGrid = (
   const xCellCount = width / CELL_SIZE;
 
   for (let i = 0; i < yCellCount; i++) {
+    const horizontalOffset = offset.x % CELL_SIZE;
+    const horizontalLinePosition = i * CELL_SIZE + horizontalOffset;
+
     // Draw horizontal lines
-    context.moveTo(0, i * CELL_SIZE);
-    context.lineTo(width, i * CELL_SIZE);
+    context.moveTo(0, horizontalLinePosition);
+    context.lineTo(width, horizontalLinePosition);
+
     for (let j = 0; j < xCellCount; j++) {
+      const verticalOffset = offset.y % CELL_SIZE;
+      const verticalLinePosition = j * CELL_SIZE + verticalOffset;
+
       // Draw vertical lines
-      context.moveTo(j * CELL_SIZE, 0);
-      context.lineTo(j * CELL_SIZE, height);
+      context.moveTo(verticalLinePosition, 0);
+      context.lineTo(verticalLinePosition, height);
     }
   }
 
   return context;
+};
+
+export const resizeCanvas = (
+  canvas: HTMLCanvasElement,
+  width: number,
+  height: number
+): void => {
+  canvas.width = width;
+  canvas.height = height;
 };

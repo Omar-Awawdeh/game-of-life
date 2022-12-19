@@ -41,13 +41,16 @@ export function App(): JSX.Element {
   const interval = useRef<number>();
 
   const handleCellClick = (x: number, y: number) => {
+    const yPos = y;
+    const xPos = x;
+
     const clickedCellIndex = liveCells.findIndex(
-      (cell) => cell.row === y && cell.column === x
+      (cell) => cell.row === yPos && cell.column === xPos
     );
 
     // If cell doesn't exist add it to the live cells
     if (clickedCellIndex < 0) {
-      setLiveCells((prev) => [...prev, createCell(x, y, true)]);
+      setLiveCells((prev) => [...prev, createCell(xPos, yPos, true)]);
       return;
     }
     // Otherwise toggle the cell's isAlive value
