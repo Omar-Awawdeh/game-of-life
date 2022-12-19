@@ -51,8 +51,8 @@ export function GameCanvas({
     }
 
     // Calculate clicked position
-    const xPos = event.clientX - offset.y;
-    const yPos = event.clientY - offset.x;
+    const xPos = event.clientX - offset.x;
+    const yPos = event.clientY - offset.y;
 
     // get clicked cell coordinates
     const clickedCell = {
@@ -77,8 +77,8 @@ export function GameCanvas({
       return;
     }
 
-    const xMovement = event.movementY;
-    const yMovement = event.movementX;
+    const xMovement = event.movementX;
+    const yMovement = event.movementY;
 
     const mouseMovement = {
       x: Math.floor(xMovement),

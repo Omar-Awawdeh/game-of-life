@@ -45,7 +45,7 @@ export function App(): JSX.Element {
     const xPos = x;
 
     const clickedCellIndex = liveCells.findIndex(
-      (cell) => cell.row === yPos && cell.column === xPos
+      (cell) => cell.row === xPos && cell.column === yPos
     );
 
     // If cell doesn't exist add it to the live cells

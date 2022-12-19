@@ -18,8 +18,8 @@ export const generateNeighborCells = (
       }
       //   Create a new cell at the current position
       const neighbor = createCell(
-        currentCell.column + i,
         currentCell.row + j,
+        currentCell.column + i,
         true
       );
 

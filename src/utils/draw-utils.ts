@@ -12,8 +12,8 @@ export const drawCells = (
 
     // Draw the cell accounting for the grid lines
     context.fillRect(
-      cell.column * CELL_SIZE + 1 + offset.y,
       cell.row * CELL_SIZE + 1 + offset.x,
+      cell.column * CELL_SIZE + 1 + offset.y,
       CELL_SIZE - 2,
       CELL_SIZE - 2
     );
@@ -36,19 +36,19 @@ export const drawGrid = (
   context.strokeStyle = CANVAS_GRID_COLOR;
 
   //  Get the number of horizontal and vertical lines
-  const yCellCount = height / CELL_SIZE;
-  const xCellCount = width / CELL_SIZE;
+  const xCellCount = height / CELL_SIZE;
+  const yCellCount = width / CELL_SIZE;
 
-  for (let i = 0; i < yCellCount; i++) {
-    const horizontalOffset = offset.x % CELL_SIZE;
+  for (let i = 0; i < xCellCount; i++) {
+    const horizontalOffset = offset.y % CELL_SIZE;
     const horizontalLinePosition = i * CELL_SIZE + horizontalOffset;
 
     // Draw horizontal lines
     context.moveTo(0, horizontalLinePosition);
     context.lineTo(width, horizontalLinePosition);
 
-    for (let j = 0; j < xCellCount; j++) {
-      const verticalOffset = offset.y % CELL_SIZE;
+    for (let j = 0; j < yCellCount; j++) {
+      const verticalOffset = offset.x % CELL_SIZE;
       const verticalLinePosition = j * CELL_SIZE + verticalOffset;
 
       // Draw vertical lines
